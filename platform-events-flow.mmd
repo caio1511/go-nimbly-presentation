@@ -1,0 +1,99 @@
+flowchart TD
+    Provisioning[Product Provisioning System] --> PublishEvent[Publish Platform Event]
+    PublishEvent --> Start[Platform Event Received]
+    
+    Start --> EventCheck{Check Event Type}
+    EventCheck -->|Trial Started| TrialPath[Process Trial Event]
+    EventCheck -->|Payment Received| PaymentCheck{Trial Event Processed?}
+    EventCheck -->|Trial Expired/Churned| ExpiredCheck{Trial Event Processed?}
+    
+    PaymentCheck -->|No| Cache[Store in Event Cache]
+    ExpiredCheck -->|No| Cache
+    
+    Cache --> Note1[Scheduled Job runs every 15 min]
+    Note1 --> ScheduledJob[Re-publish Events from Cache]
+    ScheduledJob --> Start
+    
+    PaymentCheck -->|Yes| Process
+    ExpiredCheck -->|Yes| Process
+    TrialPath --> Process
+
+    Process --> WorkspaceCheck{Workspace Exists?}
+    WorkspaceCheck -->|Yes| UpdateWS[Update Workspace Status]
+    WorkspaceCheck -->|No| CreateWS[Create New Workspace]
+    
+    CreateWS --> Note2[Set Self Serve Status = Trial
+    Set Email = User's Email]
+    Note2 --> LeadCheck
+    
+    UpdateWS --> StatusCheck{Event Type?}
+    StatusCheck -->|Trial/Payment| PaymentEventCheck
+    StatusCheck -->|Churned| SetChurned[Set Self Serve Status = Churned]
+    SetChurned --> Continue
+    
+    PaymentEventCheck{Is Payment Event?}
+    PaymentEventCheck -->|No| LeadCheck
+    PaymentEventCheck -->|Yes| ConversionCheck{Workspace Has Account?}
+    
+    ConversionCheck -->|Yes| ConvertToExisting[Convert Lead to Contact
+    Link to Existing Account]
+    ConversionCheck -->|No| ConvertToNew[Convert Lead to
+    Account and Contact]
+    
+    ConvertToExisting --> UpdateWorkspace[Update Workspace:
+    Set Status = Paid
+    Link Contact]
+    
+    ConvertToNew --> UpdateWorkspace
+    
+    UpdateWorkspace --> Continue
+    
+    LeadCheck{Lead Exists?}
+    LeadCheck -->|Yes| UpdateLead[Update Lead]
+    LeadCheck -->|No| MarketoCheck{Lead Created by Marketo?}
+    MarketoCheck -->|Yes| UpdateLead[Update Lead & Link to Workspace]
+    MarketoCheck -->|No| CreateLead[Create New Lead]
+    
+    CreateLead --> Note3[Create Lead with User's Email
+    Link Lead to Workspace]
+    Note3 --> DomainCheck
+    
+    DomainCheck{Account with Matching Domain?}
+    DomainCheck -->|Yes| LinkAccount[Link Workspace to Account]
+    DomainCheck -->|No| Continue
+    
+    LinkAccount --> Continue
+    UpdateLead --> Continue
+    
+    Continue --> ErrorCheck{Error Occurred?}
+    ErrorCheck -->|Yes| LogError[Log Error]
+    LogError --> RetryCheck{Retry Count < Max?}
+    RetryCheck -->|Yes| RetryDelay[Wait for Delay] --> Cache
+    RetryCheck -->|No| ManualReview[Flag for Manual Review]
+    
+    ErrorCheck -->|No| CommitChanges[Commit to Salesforce]
+    
+    CommitChanges --> Success[Event Processed Successfully]
+    ManualReview --> End[End]
+
+    subgraph Example[Out of Order Example]
+        direction TB
+        P1[Payment Event Arrives] --> P2[Cache Payment Event]
+        T1[Trial Event Arrives Later] --> T2[Process Trial Event]
+        T2 --> P3[Re-process Payment Event]
+    end
+    
+    style Start fill:#d4f1f4
+    style Success fill:#c1e1c1
+    style End fill:#ffcccb
+    style LogError fill:#ffecb3
+    style ManualReview fill:#ffcccb
+    style Cache fill:#e1bee7
+    style Process fill:#c8e6c9
+    style Note1 fill:#fff,stroke-dasharray: 5 5
+    style Example fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style P1 fill:#fff
+    style P2 fill:#e1bee7
+    style T1 fill:#fff
+    style T2 fill:#c8e6c9
+    style P3 fill:#c8e6c9 

@@ -1,14 +1,16 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faRocket,
-  faGears,
   faChartLine,
-  faShieldAlt,
-  faArrowsRotate
+  faGears,
+  faDatabase,
+  faUserClock,
+  faCloud,
+  faRocket,
+  faArrowsRotate,
+  faShieldAlt
 } from '@fortawesome/free-solid-svg-icons';
 import happyRep from '../../images/happy-rep.webp';
-import systemArchitecture from '../../images/system-architecture.png';
 
 const Solution = () => {
   const benefits = [
@@ -67,16 +69,6 @@ const Solution = () => {
             <p>Happy sales reps with complete visibility and control over their self-serve customers</p>
           </div>
           <img src={happyRep} alt="Happy Sales Representative" className="outcome-image" />
-        </div>
-
-        <div className="solution-details">
-          <div className="detail-section">
-            <h3>System Architecture</h3>
-            <p className="detail-description">
-              A robust architecture for real-time processing of self-serve customer data
-            </p>
-            <img src={systemArchitecture} alt="System Architecture" className="detail-image" />
-          </div>
         </div>
       </div>
     </section>
