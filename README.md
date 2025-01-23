@@ -27,7 +27,7 @@ Sales representatives currently struggle to effectively manage self-serve custom
 2. **Delayed Status Updates**: Product lifecycle changes (trials, conversions, churn) aren't immediately reflected in Salesforce
 3. **Limited Visibility**: Without proper dashboards or alert systems, sales teams can't effectively prioritize trials or respond to churned customers
 4. **Current Sales Rep Experience**
-![frustrated-rep](images/frustrated-rep.webp)
+![frustrated-rep](src/images/frustrated-rep.webp)
 
 ### **Current Go-To-Market Stack Integration**
 - Marketo (Marketing Automation) creates initial leads
@@ -94,16 +94,16 @@ An automated, fault-tolerant system that:
    - Error logging and monitoring
 
 6. **Expected Sales Rep Experience After Implementation**
-![happy-rep](images/happy-rep.webp)
+![happy-rep](src/images/happy-rep.webp)
 
 ## **System Architecture**
-![System Architecture](/images/system-architecture.png)
+![System Architecture](/src/images/system-architecture.png)
 
 ## **Data Relationships**
-![Data Relationships](/images/data-relationship.png)
+![Data Relationships](/src/images/data-relationship.png)
 
 ## **Data Flow**
-![Sequence Diagram](/images/sequence-diagram.png)
+![Sequence Diagram](/src/images/sequence-diagram.png)
 
 ## **Summary of Action Items**
 
@@ -245,7 +245,7 @@ Build a robust error tracking system to monitor integration health from day one.
      - `Priority`: Error severity (High/Medium/Low)
 
 #### **Error Handling Process**
-![Error Handling Flow](/images/error-handling-flow.png)
+![Error Handling Flow](/src/images/error-handling-flow.png)
 
 2. **Create Error Monitoring Dashboard**:
    - Display active errors by type, source, and frequency
@@ -389,7 +389,7 @@ We chose Platform Events because:
 - Assignment rules for manual review
 
 #### **Event Cache Processing**
-![Event Cache Processing](/images/event-cache-processing.png)
+![Event Cache Processing](/src/images/event-cache-processing.png)
 
 #### **Processing Flows**:
 
@@ -419,7 +419,7 @@ Link `Workspace` records to `Leads` and `Accounts` for complete data relationshi
        └─► If none: Create new Lead
    ```
 
-   ![Lead Processing Flow](/images/lead-processing-flow.png)
+   ![Lead Processing Flow](/src/images/lead-processing-flow.png)
 
 2. **Account Matching Flow**:
    ```
@@ -430,7 +430,7 @@ Link `Workspace` records to `Leads` and `Accounts` for complete data relationshi
        └─► If none: Queue for review
    ```
 
-   ![Lead Linking Flow](/images/lead-linking-flow.png)
+   ![Lead Linking Flow](/src/images/lead-linking-flow.png)
 
 3. **Lead Conversion Rules**:
    ```
@@ -445,7 +445,7 @@ Link `Workspace` records to `Leads` and `Accounts` for complete data relationshi
            └─► Auto-convert to Account/Contact
    ```
 
-   ![Lead Conversion Rules](/images/lead-conversion-rules.png)
+   ![Lead Conversion Rules](/src/images/lead-conversion-rules.png)
 
 4. **Marketo Sync Handler**:
    ```
@@ -455,7 +455,7 @@ Link `Workspace` records to `Leads` and `Accounts` for complete data relationshi
        └─► If none: Cache for later
    ```
 
-   ![Marketo Sync Handler](/images/marketo-sync-handler.png)
+   ![Marketo Sync Handler](/src/images/marketo-sync-handler.png)
 
 #### **Requirements Met**
 - Ensures `Workspace` records are fully linked to marketing and sales data.

@@ -1,0 +1,135 @@
+.layout {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-bottom: 40px; /* Space for the footer */
+}
+
+.header {
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: #555;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--primary-color);
+}
+
+.nav-link.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding: 20px;
+}
+
+.hire-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(44, 62, 80, 0.7);
+  backdrop-filter: blur(5px);
+  padding: 6px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
+  transform: translateY(100%);
+  animation: slideUp 0.5s ease-out 3s forwards;
+  transition: opacity 0.3s ease;
+}
+
+.hire-footer:hover {
+  opacity: 1;
+  background: rgba(44, 62, 80, 0.9);
+}
+
+.hire-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 400;
+}
+
+.emoji {
+  font-size: 1em;
+  opacity: 0.9;
+  animation: bounce 3s infinite;
+}
+
+.message {
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .nav-links {
+    padding: 0 10px;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+  
+  .hire-message {
+    font-size: 0.75rem;
+  }
+} 
