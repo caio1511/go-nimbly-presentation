@@ -4,14 +4,12 @@ import {
   faBolt,
   faDatabase,
   faGears,
-  faArrowsRotate,
-  faShieldAlt
+  faTriangleExclamation,
+  faCircleCheck
 } from '@fortawesome/free-solid-svg-icons';
-import leadProcessingFlow from '../../images/lead-processing-flow.png';
-import errorHandlingFlow from '../../images/error-handling-flow.png';
-import eventCacheFlow from '../../images/event-cache-processing.png';
 import systemArchitecture from '../../images/system-architecture.png';
 import sequenceDiagram from '../../images/sequence-diagram.png';
+import errorHandlingFlow from '../../images/error-handling-flow.png';
 
 const Architecture = () => {
   const components = [
@@ -49,7 +47,7 @@ const Architecture = () => {
       ]
     },
     {
-      icon: faArrowsRotate,
+      icon: faTriangleExclamation,
       title: "Sync Manager",
       description: "**Bi-directional synchronization** of customer data",
       details: [
@@ -60,7 +58,7 @@ const Architecture = () => {
       ]
     },
     {
-      icon: faShieldAlt,
+      icon: faCircleCheck,
       title: "Error Management System",
       description: "**Comprehensive error handling** and recovery",
       details: [
@@ -69,27 +67,6 @@ const Architecture = () => {
         "**Alert notifications**",
         "**Resolution tracking**"
       ]
-    }
-  ];
-
-  const flows = [
-    {
-      title: "Lead Processing Flow",
-      description: "How the system handles **new leads** and **trial signups**",
-      image: leadProcessingFlow,
-      details: "**Automated workflow** from initial contact to **qualified lead**, with **real-time updates** to sales team"
-    },
-    {
-      title: "Error Handling Strategy",
-      description: "**Multi-layered approach** to error management",
-      image: errorHandlingFlow,
-      details: "**Proactive monitoring** and **automated recovery** with **fallback mechanisms**"
-    },
-    {
-      title: "Event Cache Processing",
-      description: "**Intelligent handling** of event sequences",
-      image: eventCacheFlow,
-      details: "**State-based processing** with **automatic retry** and **dependency management**"
     }
   ];
 
@@ -124,22 +101,6 @@ const Architecture = () => {
           <img src={systemArchitecture} alt="System Architecture Diagram" className="detail-image" />
         </div>
 
-        <div className="detail-section">
-          <h3>Lead Processing Flow</h3>
-          <p className="detail-description">
-            Automated workflow from initial contact to qualified lead
-          </p>
-          <img src={leadProcessingFlow} alt="Lead Processing Flow" className="detail-image" />
-        </div>
-
-        <div className="detail-section">
-          <h3>Event Processing Flow</h3>
-          <p className="detail-description">
-            Efficient event processing ensuring data consistency across all systems
-          </p>
-          <img src={sequenceDiagram} alt="Sequence Diagram" className="detail-image" />
-        </div>
-
         <div className="architecture-components">
           {components.map((component, index) => (
             <div key={index} className="component-card">
@@ -162,18 +123,21 @@ const Architecture = () => {
         </div>
 
         <div className="architecture-flows">
-          {flows.map((flow, index) => (
-            <div key={index} className="flow-section">
-              <h3>{flow.title}</h3>
-              <p className="flow-description" dangerouslySetInnerHTML={{ 
-                __html: flow.description.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-              }} />
-              <img src={flow.image} alt={flow.title} className="flow-image" />
-              <p className="flow-details" dangerouslySetInnerHTML={{ 
-                __html: flow.details.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-              }} />
-            </div>
-          ))}
+          <div className="flow-section">
+            <h3>Event Processing Flow</h3>
+            <p className="flow-description">
+              Efficient event processing ensuring data consistency and real-time updates
+            </p>
+            <img src={sequenceDiagram} alt="Event Processing Flow" className="flow-image" />
+          </div>
+
+          <div className="flow-section">
+            <h3>Error Handling Strategy</h3>
+            <p className="flow-description">
+              Comprehensive error handling and recovery process
+            </p>
+            <img src={errorHandlingFlow} alt="Error Handling Flow" className="flow-image" />
+          </div>
         </div>
 
         <div className="architecture-note">
