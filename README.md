@@ -315,7 +315,8 @@ We chose Platform Events because:
        - Churn_Reason__c: Reason for churning
        - Feedback__c: Customer feedback
        ```
-      Example Payloads:
+
+    Example Payloads:
       ```json
       // Trial Event
       {
