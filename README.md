@@ -639,22 +639,23 @@ POST /services/data/v59.0/sobjects/SelfServeTrialEvent__e
 ```
 
 #### **Field Requirements**
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| Workspace_ID__c | String | Yes | Unique identifier for the workspace |
-| Email__c | String | Yes | Primary user's email |
-| Event_Type__c | String | Yes | One of: Trial, Conversion, Churn |
-| Event_Timestamp__c | DateTime | Yes | When the event occurred |
-| Trial_Start_Date__c | DateTime | For Trial | When trial begins |
-| Trial_End_Date__c | DateTime | For Trial | When trial expires |
-| Company_Name__c | String | For Trial | Company name |
-| Subscription_ID__c | String | For Conversion | Stripe subscription ID |
-| Plan_Type__c | String | For Conversion | Product plan name |
-| MRR__c | Decimal | For Conversion | Monthly recurring revenue |
-| Billing_Interval__c | String | For Conversion | monthly/annual |
-| Churn_Date__c | DateTime | For Churn | When subscription ended |
-| Churn_Reason__c | String | No | Reason for churning |
-| Feedback__c | String | No | Customer feedback |
+
+| Field              | Type     | Required | Description                           |
+|-------------------|----------|----------|---------------------------------------|
+| Workspace_ID__c   | String   | Yes      | Unique identifier for the workspace   |
+| Email__c          | String   | Yes      | Primary user's email                  |
+| Event_Type__c     | String   | Yes      | One of: Trial, Conversion, Churn     |
+| Event_Timestamp__c | DateTime | Yes      | When the event occurred              |
+| Trial_Start_Date__c| DateTime | For Trial| When trial begins                    |
+| Trial_End_Date__c  | DateTime | For Trial| When trial expires                   |
+| Company_Name__c    | String   | For Trial| Company name                         |
+| Subscription_ID__c | String   | For Conv.| Stripe subscription ID               |
+| Plan_Type__c      | String   | For Conv.| Product plan name                    |
+| MRR__c            | Decimal  | For Conv.| Monthly recurring revenue            |
+| Billing_Interval__c| String   | For Conv.| monthly/annual                       |
+| Churn_Date__c     | DateTime | For Churn| When subscription ended              |
+| Churn_Reason__c   | String   | No       | Reason for churning                  |
+| Feedback__c       | String   | No       | Customer feedback                     |
 
 #### **Error Handling**
 - Implement exponential backoff for retries
